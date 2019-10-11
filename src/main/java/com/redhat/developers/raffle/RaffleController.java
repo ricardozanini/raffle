@@ -7,12 +7,15 @@ import twitter4j.*;
 
 import javax.servlet.http.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 @RestController
 public class RaffleController {
 
+    private static final String DATE_PATTERN = "yyyy-MM-dd";
+            
     private Log log = LogFactory.getLog(RaffleController.class.getName());
 
     private Twitter twitter = new TwitterFactory().getInstance();
@@ -53,9 +56,13 @@ public class RaffleController {
 
     private String getQueryString(String hashtag) throws TwitterException {
         // Must mention you, with a hashtag, a picture and must not be a RT
-        String queryString = "@" + twitter.getScreenName() + " #" + hashtag + "  filter:media -filter:retweets";
+        //String queryString = "@" + twitter.getScreenName() + " #" + hashtag + "  filter:media -filter:retweets";
         // For TEST only
-        // String queryString = "@openshift #" + hashtag + "  -filter:retweets";
+        //String queryString = "@rhdevelopers #" + hashtag + "  -filter:retweets";
+        
+        // all tweets from #hashtag since today, no RTs. See: https://developer.twitter.com/en/docs/tweets/search/guides/standard-operators
+        final SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+        String queryString = "#" + hashtag + " since:" + sdf.format(new Date()) + " -filter:retweets";
         log.info("Query String: " + queryString);
         return queryString;
     }

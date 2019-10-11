@@ -26,7 +26,7 @@ Run with
     
 Access the URL: `http://localhost:8080/<hashtag for the raffle>`
 
-NOTE: Under the [Standard Search  API](https://developer.twitter.com/en/docs/tweets/search/overview), only the 7 last days are included in the result.
+NOTE: Under the [Standard Search  API](https://developer.twitter.com/en/docs/tweets/search/overview), only the 7 last days are included in the result. Twitter4j uses the [search operator](https://developer.twitter.com/en/docs/tweets/search/guides/standard-operators) to perform searches. 
 
 ## Criteria for the Raffle
 
